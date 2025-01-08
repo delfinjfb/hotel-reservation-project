@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
  */
 @SpringBootApplication
 @EntityScan(basePackages = "com.example.hotelReservation.model")
-public final class HotelReservationApplication {
+public class HotelReservationApplication {
 
     /**
      * Main method to start the application.
@@ -22,10 +22,5 @@ public final class HotelReservationApplication {
     public static void main(final String[] args) {
         SpringApplication.run(HotelReservationApplication.class,
                 args);
-    }
-
-    private HotelReservationApplication() {
-        throw new UnsupportedOperationException(
-                "This is a utility class and cannot be instantiated");
     }
 }
