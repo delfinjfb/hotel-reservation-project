@@ -53,6 +53,12 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- Postgresql Database -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.6.0</version> <!-- Replace with the latest version -->
+        </dependency>
 
         <!-- Springdoc OpenAPI -->
         <dependency>
