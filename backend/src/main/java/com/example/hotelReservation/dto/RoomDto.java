@@ -50,5 +50,8 @@ public class RoomDto {
      */
     private BigDecimal basePrice;
 
-    // Ensure there is a newline at the end of this file.
+    /**
+     * Category Room from entity RoomCategory
+     */
+    private RoomCategoryDTO roomCategory;   // Include room category name
 }

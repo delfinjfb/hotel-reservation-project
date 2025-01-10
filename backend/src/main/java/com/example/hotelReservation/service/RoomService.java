@@ -64,8 +64,9 @@ public final class RoomService {
     public RoomDto getRoomById(final Integer id) {
         return roomRepository.findById(id)
                 .map(roomDtoMapper::toRoomDto)
-                .orElseThrow(() -> new RuntimeException(
-                        "Room not found with id " + id));
+                .orElseThrow(() -> new RuntimeException("Room not found with "
+                        + "id "
+                        + id));
     }
 
     /**
@@ -87,15 +88,18 @@ public final class RoomService {
      * @param roomDto the {@link RoomDto} with updated details.
      * @return the updated {@link RoomDto}.
      */
-    public RoomDto updateRoom(final Integer id, final RoomDto roomDto) {
+    public RoomDto updateRoom(final Integer id,
+                              final RoomDto roomDto) {
         Room existingRoom = roomRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "Room not found with id " + id));
+                        "Room not found with id "
+                                + id));
 
         existingRoom.setRoomNumber(roomDto.getRoomNumber());
         existingRoom.setRoomType(roomDto.getRoomType());
 
-        if (roomDto.getBasePrice() != null) {
+        if (roomDto.getBasePrice()
+                != null) {
             existingRoom.setBasePrice(roomDto.getBasePrice());
         }
 
@@ -110,7 +114,8 @@ public final class RoomService {
      */
     public void deleteRoom(final Integer id) {
         if (!roomRepository.existsById(id)) {
-            throw new RuntimeException("Room not found with id " + id);
+            throw new RuntimeException("Room not found with id "
+                    + id);
         }
         roomRepository.deleteById(id);
     }
@@ -123,7 +128,9 @@ public final class RoomService {
      * @return a list of {@link RoomCategoryProjection}.
      */
     public List<RoomCategoryProjection> getAvailableRooms(
-            final LocalDate startDate, final LocalDate endDate) {
-        return roomRepository.findAvailableRoomProjections(startDate, endDate);
+            final LocalDate startDate,
+            final LocalDate endDate) {
+        return roomRepository.findAvailableRoomProjections(startDate,
+                endDate);
     }
 }
