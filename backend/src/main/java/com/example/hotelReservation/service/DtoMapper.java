@@ -2,12 +2,14 @@ package com.example.hotelReservation.service;
 
 import com.example.hotelReservation.dto.BookingDto;
 import com.example.hotelReservation.dto.CustomerDto;
+import com.example.hotelReservation.dto.RoomCategoryDTO;
 import com.example.hotelReservation.dto.RoomDto;
 import com.example.hotelReservation.dto.SeasonDto;
 import com.example.hotelReservation.dto.ServiceRequestDto;
 import com.example.hotelReservation.model.Booking;
 import com.example.hotelReservation.model.Customer;
 import com.example.hotelReservation.model.Room;
+import com.example.hotelReservation.model.RoomCategory;
 import com.example.hotelReservation.model.Season;
 import com.example.hotelReservation.model.ServiceRequest;
 import org.springframework.stereotype.Component;
@@ -37,7 +39,8 @@ public final class DtoMapper {
                 .roomId(booking.getRoom()
                         != null
                         ?
-                        booking.getRoom().getId()
+                        booking.getRoom()
+                                .getId()
                         :
                         null)
                 .customerId(booking.getCustomerId())
@@ -46,7 +49,8 @@ public final class DtoMapper {
                 .totalPrice(booking.getTotalPrice()
                         != null
                         ?
-                        booking.getTotalPrice().doubleValue()
+                        booking.getTotalPrice()
+                                .doubleValue()
                         :
                         null)
                 .status(booking.getStatus())
@@ -54,7 +58,8 @@ public final class DtoMapper {
                 .appliedMultiplier(booking.getAppliedMultiplier()
                         != null
                         ?
-                        booking.getAppliedMultiplier().doubleValue()
+                        booking.getAppliedMultiplier()
+                                .doubleValue()
                         :
                         null)
                 .appliedSeasonName(booking.getAppliedSeasonName())
@@ -235,11 +240,13 @@ public final class DtoMapper {
         return RoomDto.builder()
                 .id(room.getId())
                 .roomNumber(room.getRoomNumber())
-                .roomType(room.getRoomType())
-                .roomSize(room.getRoomSize())
-                .roomMaxPersons(room.getRoomMaxPersons())
                 .roomDescription(room.getRoomDescription())
+                .roomSize(room.getRoomSize())
+                .roomType(room.getRoomType())
+                .roomMaxPersons(room.getRoomMaxPersons())
                 .basePrice(room.getBasePrice())
+                .roomCategory(toRoomCategoryDTO(room.getRoomCategory()))  //
+                // Proper mapping to DTO
                 .build();
     }
 
@@ -262,6 +269,24 @@ public final class DtoMapper {
                 .roomMaxPersons(dto.getRoomMaxPersons())
                 .roomDescription(dto.getRoomDescription())
                 .basePrice(dto.getBasePrice())
+                .build();
+    }
+
+    /**
+     * Converts a RoomCategory entity to a RoomCategoryDTO.
+     *
+     * @param category the RoomCategory entity
+     * @return the RoomCategoryDTO
+     */
+    public RoomCategoryDTO toRoomCategoryDTO(final RoomCategory category) {
+        if (category
+                == null) {
+            return null;
+        }
+        return RoomCategoryDTO.builder()
+                .id(category.getId())
+                .categoryName(category.getCategoryName())
+                .categoryDescription(category.getCategoryDescription())
                 .build();
     }
 }

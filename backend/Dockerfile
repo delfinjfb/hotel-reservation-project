@@ -1,14 +1,27 @@
-# Use a minimal base image with Java 17
-FROM eclipse-temurin:17-jdk-alpine
+# Stage 1: Build the JAR
+FROM maven:3.9.4-eclipse-temurin-17 AS build
 
-# Create a directory for the app
+# Set working directory
 WORKDIR /app
 
-# Copy the jar file from the Maven build into the container
-COPY target/demo-0.0.1-SNAPSHOT.jar app.jar
+# Copy the pom.xml and source code
+COPY pom.xml .
+COPY src ./src
 
-# Expose port 8080 (Spring Boot's default)
+# Build the application
+RUN mvn clean package -DskipTests
+
+# Stage 2: Create the runtime image
+FROM eclipse-temurin:17-jdk-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy the JAR file from the build stage
+COPY --from=build /app/target/hotel-reservation-service-1.0.0-SNAPSHOT.jar app.jar
+
+# Expose port 8080
 EXPOSE 8080
 
-# Run the Spring Boot app
+# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
