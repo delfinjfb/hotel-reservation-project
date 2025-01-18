@@ -1,1 +1,29 @@
-<p>header works!</p>
+<!-- Header -->
+<header class="bg-gradient-to-r from-blue-500 to-purple-600 shadow-md">
+    <nav class="container mx-auto flex justify-between items-center py-4 px-6">
+        <!-- Logo -->
+        <div class="text-white text-2xl font-bold">
+            <a routerLink="/" class="hover:text-yellow-300 transition">🏨 Hotel Delfino</a>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="flex space-x-8">
+            <li>
+                <a routerLink="/rooms" routerLinkActive="text-yellow-300"
+                    class="text-white hover:text-yellow-300 transition">Rooms</a>
+            </li>
+            <li>
+                <a routerLink="/booking" routerLinkActive="text-yellow-300"
+                    class="text-white hover:text-yellow-300 transition">Book Now</a>
+            </li>
+            <li>
+                <a routerLink="/service-request" routerLinkActive="text-yellow-300"
+                    class="text-white hover:text-yellow-300 transition">Services</a>
+            </li>
+            <li>
+                <a routerLink="/login" routerLinkActive="text-yellow-300"
+                    class="text-white hover:text-yellow-300 transition">Admin Login</a>
+            </li>
+        </ul>
+    </nav>
+</header>
