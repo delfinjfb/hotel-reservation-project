@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Room } from '../models/room.model';
+import { Room } from '../../models/room.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root'  // ✅ Provides the service globally
 })
 export class RoomService {
-  private apiUrl = '/api/rooms';  // API endpoint
+  //private apiUrl = 'https://hotel-reservation-project.onrender.com/api/rooms';
+  //private apiUrl = 'http://localhost:8080/api/rooms';
 
+  private apiUrl = '/api/rooms';  // ✅ Now using the proxy
   constructor(private http: HttpClient) { }
 
-  getAvailableRooms(): Observable<Room[]> {
+  getRooms(): Observable<Room[]> {
     return this.http.get<Room[]>(this.apiUrl);
   }
 }

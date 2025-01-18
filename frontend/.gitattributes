@@ -1,0 +1,5 @@
+# Treat TypeScript files as Angular
+*.ts linguist-language=TypeScript
+
+# Prioritize Angular files in src/
+src/** linguist-detectable=true

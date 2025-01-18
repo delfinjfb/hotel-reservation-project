@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: '', component: HeaderComponent },
   { path: 'rooms', component: RoomListComponent },
   { path: 'booking', component: BookingComponent },
-  { path: 'service-request', component: ServiceRequestComponent }
+  { path: 'service-request', component: ServiceRequestComponent },
+  { path: '**', redirectTo: 'rooms' }
 ];
 
 @NgModule({

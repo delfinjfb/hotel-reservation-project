@@ -1,59 +1,157 @@
-# Frontend
+# Hotel Reservation Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
+![Angular](https://img.shields.io/badge/Angular-v16-red?logo=angular)
+![TypeScript](https://img.shields.io/badge/TypeScript-v4-blue?logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v3-blue?logo=tailwindcss)
 
-## Development server
+## 📖 Project Overview
 
-To start a local development server, run:
+This is the **Frontend** of the Hotel Reservation Project built with **Angular 16**, **TypeScript**, and **Tailwind CSS**. It connects to a Spring Boot REST API to handle hotel room listings, bookings, and service requests.
 
-```bash
-ng serve
+Live Demo: in hold 
+
+Backend Repo: [Hotel Reservation Backend](https://github.com/delfinjfb/hotel-reservation-project/tree/main/backend)
+
+---
+
+## 🚀 Features
+
+- 🏨 **Room Listing:** Displays available rooms fetched from the backend API.
+- 📅 **Booking System:** Allows users to book hotel rooms.
+- 🛎️ **Service Requests:** Submit service requests for hotel amenities.
+- 🔒 **Admin Login:** Secure admin login for managing bookings and services.
+- 🎨 **Responsive UI:** Fully responsive design using Tailwind CSS.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** Angular 16
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **API Integration:** REST API (Spring Boot Backend)
+
+---
+
+## 📂 Project Structure
+
+```
+frontend/
+├── src/
+│   ├── app/
+│   │   ├── client/
+│   │   │   ├── components/
+│   │   │   │   ├── header/
+│   │   │   │   ├── room-list/
+│   │   │   │   ├── booking/
+│   │   │   │   └── service-request/
+│   │   ├── admin/
+│   │   ├── auth/
+│   │   ├── core/
+│   │   │   └── services/
+│   │   │       └── room.service.ts
+│   │   └── models/
+│   ├── assets/
+│   └── environments/
+├── angular.json
+├── package.json
+├── tailwind.config.js
+└── README.md
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🔧 Installation & Setup
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/delfinjfb/hotel-reservation-project.git
+   
+   cd hotel-reservation-frontend
+   ```
 
-```bash
-ng generate component component-name
-```
+2. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+3. **Run the Development Server:**
+   ```bash
+   ng serve
+   ```
+   > Open `http://localhost:4200` in your browser.
 
-```bash
-ng generate --help
-```
+4. **Backend Setup:**
+   - Ensure the backend API is running at `http://localhost:8080` or update the URL in `environment.ts`.
 
-## Building
+---
 
-To build the project run:
+## 🌐 API Endpoint
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+The frontend fetches room data from the Spring Boot backend:
 
 ```bash
-ng e2e
+GET https://hotel-reservation-project.onrender.com/api/rooms
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 🏗️ Build for Production
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+ng build --configuration production
+```
+
+---
+
+## ⚙️ Proxy Configuration (for local development)
+
+To resolve CORS issues during development, create a `proxy.conf.json`:
+
+```json
+{
+  "/api": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
+```
+
+Add this to `angular.json`:
+
+```json
+"serve": {
+  "options": {
+    "proxyConfig": "src/proxy.conf.json"
+  }
+}
+```
+
+---
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit your changes: `git commit -m "Add feature X"`
+4. Push to the branch: `git push origin feature-name`
+5. Open a pull request.
+
+---
+
+## 📞 Contact
+
+**Delfin**  
+📧 [delfinjfb@gmail.com](mailto:delfinjfb@gmail.com)  
+
+---
+
+Thank you for checking out this project! ⭐ If you like it, give it a star!
+
