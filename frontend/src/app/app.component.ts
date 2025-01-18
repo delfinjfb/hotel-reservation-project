@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from "./client/components/header/header.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [RouterOutlet, HeaderComponent] // ✅ Use RouterOutlet for routing
+  // ✅ Use RouterOutlet for routing
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'hotel-reservation-project';
 }
