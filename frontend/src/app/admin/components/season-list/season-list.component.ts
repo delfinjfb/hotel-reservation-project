@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-season-list',
   imports: [],
   templateUrl: './season-list.component.html',
-  styleUrl: './season-list.component.scss'
+  styleUrl: './season-list.component.scss',
 })
-export class SeasonListComponent {
-
-}
+export class SeasonListComponent {}

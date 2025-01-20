@@ -10,11 +10,11 @@ const routes: Routes = [
   { path: 'rooms', component: RoomListComponent },
   { path: 'booking', component: BookingComponent },
   { path: 'service-request', component: ServiceRequestComponent },
-  { path: '**', redirectTo: 'rooms' }
+  { path: '**', redirectTo: 'rooms' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ClientRoutingModule { }
+export class ClientRoutingModule {}
