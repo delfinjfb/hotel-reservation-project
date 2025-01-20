@@ -1,26 +1,29 @@
 <div class="container mx-auto py-10">
-    <h2 class="text-3xl font-bold mb-6">Available Rooms</h2>
+  <h2 class="text-3xl font-bold mb-6">Available Rooms</h2>
 
-    <!-- Loading Spinner -->
-    <div *ngIf="loading" class="text-center">
-        <p>Loading rooms...</p>
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="text-center">
+    <p>Loading rooms...</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="text-red-500">
+    {{ error }}
+  </div>
+
+  <!-- Room Cards -->
+  <div *ngIf="!loading && !error" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div
+      *ngFor="let room of rooms"
+      class="bg-white shadow-md rounded-lg p-5 hover:shadow-xl transition"
+    >
+      <h3 class="text-xl font-semibold">{{ room.roomType }} - Room #{{ room.roomNumber }}</h3>
+      <p class="mt-2 text-gray-600">{{ room.roomDescription }}</p>
+      <p class="mt-2 text-green-600 font-bold">Price: ${{ room.basePrice }}</p>
+
+      <button class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+        Book Now
+      </button>
     </div>
-
-    <!-- Error Message -->
-    <div *ngIf="error" class="text-red-500">
-        {{ error }}
-    </div>
-
-    <!-- Room Cards -->
-    <div *ngIf="!loading && !error" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div *ngFor="let room of rooms" class="bg-white shadow-md rounded-lg p-5 hover:shadow-xl transition">
-            <h3 class="text-xl font-semibold">{{ room.roomType }} - Room #{{ room.roomNumber }}</h3>
-            <p class="mt-2 text-gray-600">{{ room.roomDescription }}</p>
-            <p class="mt-2 text-green-600 font-bold">Price: ${{ room.basePrice }}</p>
-
-            <button class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-                Book Now
-            </button>
-        </div>
-    </div>
+  </div>
 </div>

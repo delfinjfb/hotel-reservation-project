@@ -8,9 +8,8 @@ describe('SeasonListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SeasonListComponent]
-    })
-    .compileComponents();
+      imports: [SeasonListComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SeasonListComponent);
     component = fixture.componentInstance;

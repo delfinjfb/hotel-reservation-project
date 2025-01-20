@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-booking',
   imports: [],
   templateUrl: './booking.component.html',
-  styleUrl: './booking.component.scss'
+  styleUrl: './booking.component.scss',
 })
-export class BookingComponent {
-
-}
+export class BookingComponent {}

@@ -7,7 +7,7 @@ import { RoomListComponent } from './components/room-list/room-list.component';
   imports: [
     CommonModule,
     ClientRoutingModule,
-    RoomListComponent  // ✅ Import the standalone component here
-  ]
+    RoomListComponent, // ✅ Import the standalone component here
+  ],
 })
-export class ClientModule { }
+export class ClientModule {}
