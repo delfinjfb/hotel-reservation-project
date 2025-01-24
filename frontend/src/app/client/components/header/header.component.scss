@@ -1,0 +1,36 @@
+header {
+  background-image: url('/assets/images/header-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 1rem 0;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #ffd700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+
+      a {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #ffd700;
+        }
+      }
+    }
+  }
+}
