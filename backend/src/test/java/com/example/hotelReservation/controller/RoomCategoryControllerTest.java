@@ -1,87 +1,59 @@
 package com.example.hotelReservation.controller;
 
-import com.example.hotelReservation.model.RoomCategory;
+import com.example.hotelReservation.dto.RoomCategoryWithRoomsDto;
+import com.example.hotelReservation.dto.RoomCategoryWithoutRoomsDto;
 import com.example.hotelReservation.service.RoomCategoryService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
-
-@WebMvcTest(RoomCategoryController.class)
 public class RoomCategoryControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    @Mock
     private RoomCategoryService roomCategoryService;
 
-    @Test
-    public void testGetAllCategories() throws Exception {
-        // Create RoomCategory objects using the builder
-        RoomCategory category1 = RoomCategory.builder()
-                .id(1)
-                .categoryName("Deluxe")
-                .categoryDescription("Spacious rooms with marble bathrooms.")
-                .build();
+    @InjectMocks
+    private RoomCategoryController roomCategoryController;
 
-        RoomCategory category2 = RoomCategory.builder()
-                .id(2)
-                .categoryName("Suite")
-                .categoryDescription(
-                        "Luxurious suites with exceptional amenities.")
-                .build();
-
-        List<RoomCategory> categories = Arrays.asList(category1, category2);
-
-        // Mock the service
-        Mockito.when(roomCategoryService.getAllCategories())
-                .thenReturn(categories);
-
-        // Perform the GET request and validate the response
-        mockMvc.perform(get("/api/room-categories")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].categoryName").value("Deluxe"))
-                .andExpect(jsonPath("$[1].categoryName").value("Suite"));
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testCreateCategory() throws Exception {
-        RoomCategory category = RoomCategory.builder()
-                .id(1)
-                .categoryName("Deluxe")
-                .categoryDescription("Spacious rooms with marble bathrooms.")
-                .build();
+    public void testGetAllCategoriesWithRooms() {
+        List<RoomCategoryWithRoomsDto> categories = Arrays.asList(
+                new RoomCategoryWithRoomsDto(1, "Category1", "Description1", null),
+                new RoomCategoryWithRoomsDto(2, "Category2", "Description2", null)
+        );
 
-        Mockito.when(roomCategoryService.createCategory(
-                Mockito.any(RoomCategory.class))).thenReturn(category);
+        when(roomCategoryService.getAllCategoriesWithRooms()).thenReturn(categories);
 
-        String json = """
-                {
-                    "categoryName": "Deluxe",
-                    "categoryDescription": "Spacious rooms with marble bathrooms."
-                }
-                """;
+        ResponseEntity<List<RoomCategoryWithRoomsDto>> response = roomCategoryController.getAllCategoriesWithRooms();
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(categories, response.getBody());
+    }
 
-        mockMvc.perform(post("/api/room-categories")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.categoryName").value("Deluxe"))
-                .andExpect(jsonPath("$.categoryDescription").value(
-                        "Spacious rooms with marble bathrooms."));
+    @Test
+    public void testGetAllCategoriesWithoutRooms() {
+        List<RoomCategoryWithoutRoomsDto> categories = Arrays.asList(
+                new RoomCategoryWithoutRoomsDto(1, "Category1", "Description1"),
+                new RoomCategoryWithoutRoomsDto(2, "Category2", "Description2")
+        );
+
+        when(roomCategoryService.getAllCategoriesWithoutRooms()).thenReturn(categories);
+
+        ResponseEntity<List<RoomCategoryWithoutRoomsDto>> response = roomCategoryController.getAllCategoriesWithoutRooms();
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(categories, response.getBody());
     }
 }
