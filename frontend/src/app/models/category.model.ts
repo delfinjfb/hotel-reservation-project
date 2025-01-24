@@ -2,9 +2,10 @@ import { Room } from './room.model';
 
 export interface Category {
   id: number;
-  name: string;
-  description: string;
-  thumbnail: string; // Thumbnail for the category
-  images: string[]; // URLs for carousel images
-  rooms?: Room[]; // Optional: Rooms in this category
+  categoryName: string; // Match exactly with API field names
+  categoryDescription: string; // Match exactly with API field names
+  basePrice?: number; // Optional if not provided by the API
+  thumbnail?: string; // Optional
+  images?: string[]; // Optional
+  rooms?: Room[]; // Optional
 }

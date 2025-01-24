@@ -1,7 +1,10 @@
 package com.example.hotelReservation.service;
 
+import com.example.hotelReservation.dto.RoomCategoryWithRoomsDto;
+import com.example.hotelReservation.dto.RoomCategoryWithoutRoomsDto;
 import com.example.hotelReservation.model.RoomCategory;
 import com.example.hotelReservation.repository.RoomCategoryRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,37 +24,44 @@ public class RoomCategoryServiceTest {
     @InjectMocks
     private RoomCategoryService roomCategoryService;
 
-    public RoomCategoryServiceTest() {
+    @BeforeEach
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testGetAllCategories() {
-        // Create sample RoomCategory objects using Lombok's @Builder
-        RoomCategory category1 = RoomCategory.builder()
-                .id(1)
-                .categoryName("Deluxe")
-                .categoryDescription("Spacious rooms with marble bathrooms.")
-                .build();
+    public void testGetAllCategoriesWithRooms() {
+        List<RoomCategory> categories = Arrays.asList(
+                new RoomCategory(1, "Category1", "Description1", null, null, null),
+                new RoomCategory(2, "Category2", "Description2", null, null, null)
+        );
 
-        RoomCategory category2 = RoomCategory.builder()
-                .id(2)
-                .categoryName("Suite")
-                .categoryDescription(
-                        "Luxurious suites with exceptional amenities.")
-                .build();
-
-        List<RoomCategory> categories = Arrays.asList(category1, category2);
-
-        // Mock the repository
         when(roomCategoryRepository.findAll()).thenReturn(categories);
 
-        // Call the service method
-        List<RoomCategory> result = roomCategoryService.getAllCategories();
+        List<RoomCategoryWithRoomsDto> expected = Arrays.asList(
+                new RoomCategoryWithRoomsDto(1, "Category1", "Description1", null),
+                new RoomCategoryWithRoomsDto(2, "Category2", "Description2", null)
+        );
 
-        // Assert the results
-        assertEquals(2, result.size());
-        assertEquals("Deluxe", result.get(0).getCategoryName());
-        assertEquals("Suite", result.get(1).getCategoryName());
+        List<RoomCategoryWithRoomsDto> result = roomCategoryService.getAllCategoriesWithRooms();
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testGetAllCategoriesWithoutRooms() {
+        List<RoomCategory> categories = Arrays.asList(
+                new RoomCategory(1, "Category1", "Description1", null, null, null),
+                new RoomCategory(2, "Category2", "Description2", null, null, null)
+        );
+
+        when(roomCategoryRepository.findAll()).thenReturn(categories);
+
+        List<RoomCategoryWithoutRoomsDto> expected = Arrays.asList(
+                new RoomCategoryWithoutRoomsDto(1, "Category1", "Description1"),
+                new RoomCategoryWithoutRoomsDto(2, "Category2", "Description2")
+        );
+
+        List<RoomCategoryWithoutRoomsDto> result = roomCategoryService.getAllCategoriesWithoutRooms();
+        assertEquals(expected, result);
     }
 }

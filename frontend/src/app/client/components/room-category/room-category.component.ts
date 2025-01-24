@@ -1,11 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RoomCategoryService } from '../../../core/services/room-category.service';
+import { Category } from '../../../models/category.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-room-category',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './room-category.component.html',
-  styleUrl: './room-category.component.scss'
+  styleUrls: ['./room-category.component.scss']
 })
-export class RoomCategoryComponent {
+export class RoomCategoryComponent implements OnInit {
+  roomCategories: Category[] = [];
 
+  constructor(private roomCategoryService: RoomCategoryService) {}
+
+  ngOnInit(): void {
+    this.fetchRoomCategories();
+  }
+
+  fetchRoomCategories(): void {
+    this.roomCategoryService.getRoomCategories().subscribe({
+      next: (categories) => {
+        this.roomCategories = categories;
+      },
+      error: (err) => {
+        console.error('Error fetching room categories:', err);
+      }
+    });
+  }
 }

@@ -1,5 +1,7 @@
 package com.example.hotelReservation.controller;
 
+import com.example.hotelReservation.dto.RoomCategoryWithRoomsDto;
+import com.example.hotelReservation.dto.RoomCategoryWithoutRoomsDto;
 import com.example.hotelReservation.model.RoomCategory;
 import com.example.hotelReservation.service.RoomCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,44 +14,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * Controller for handling room category-related requests.
- */
 @RestController
 @RequestMapping("/api/room-categories")
 public final class RoomCategoryController {
 
-    /**
-     * Service for managing room categories.
-     */
     private final RoomCategoryService roomCategoryService;
 
-    /**
-     * Constructs a new RoomCategoryController with the given service.
-     *
-     * @param service the service for handling room category operations
-     */
     @Autowired
     public RoomCategoryController(final RoomCategoryService service) {
         this.roomCategoryService = service;
     }
 
-    /**
-     * Retrieves all room categories.
-     *
-     * @return a response containing a list of room categories
-     */
-    @GetMapping
-    public ResponseEntity<List<RoomCategory>> getAllCategories() {
-        return ResponseEntity.ok(roomCategoryService.getAllCategories());
+    @GetMapping("/with-rooms")
+    public ResponseEntity<List<RoomCategoryWithRoomsDto>> getAllCategoriesWithRooms() {
+        return ResponseEntity.ok(roomCategoryService.getAllCategoriesWithRooms());
     }
 
-    /**
-     * Creates a new room category.
-     *
-     * @param category the room category to create
-     * @return a response containing the created room category
-     */
+    @GetMapping("/without-rooms")
+    public ResponseEntity<List<RoomCategoryWithoutRoomsDto>> getAllCategoriesWithoutRooms() {
+        return ResponseEntity.ok(roomCategoryService.getAllCategoriesWithoutRooms());
+    }
+
     @PostMapping
     public ResponseEntity<RoomCategory> createCategory(
             @RequestBody final RoomCategory category) {
