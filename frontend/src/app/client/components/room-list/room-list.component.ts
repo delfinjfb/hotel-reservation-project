@@ -1,37 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // ✅ For structural directives
-import { RoomService } from '../../../core/services/room.service';
-import { Room } from '../../../models/room.model';
+import { RoomCategoryService } from '../../../core/services/room-category.service';
+import { Category } from '../../../models/category.model';
 
 @Component({
   selector: 'app-room-list',
   templateUrl: './room-list.component.html',
-  styleUrls: ['./room-list.component.scss'],
-  standalone: true,
-  imports: [CommonModule], // ✅ CommonModule is required
+  styleUrls: ['./room-list.component.scss']
 })
 export class RoomListComponent implements OnInit {
-  rooms: Room[] = [];
-  loading = true;
-  error = '';
+  roomCategories: Category[] = [];
 
-  constructor(private roomService: RoomService) {}
+  constructor(private roomCategoryService: RoomCategoryService) {}
 
   ngOnInit(): void {
-    this.fetchRooms();
+    this.fetchRoomCategories();
   }
 
-  fetchRooms(): void {
-    this.roomService.getRooms().subscribe({
-      next: (data) => {
-        this.rooms = data;
-        this.loading = false;
+  fetchRoomCategories(): void {
+    this.roomCategoryService.getRoomCategories().subscribe({
+      next: (categories) => {
+        this.roomCategories = categories;
       },
       error: (err) => {
-        console.error('Error fetching rooms:', err);
-        this.error = 'Could not load rooms. Please try again later.';
-        this.loading = false;
-      },
+        console.error('Error fetching room categories:', err);
+      }
     });
   }
 }
