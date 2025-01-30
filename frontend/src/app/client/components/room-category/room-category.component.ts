@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './room-category.component.html',
-  styleUrls: ['./room-category.component.scss']
+  styleUrls: ['./room-category.component.scss'],
 })
 export class RoomCategoryComponent implements OnInit {
   roomCategories: Category[] = [];
@@ -26,7 +26,7 @@ export class RoomCategoryComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching room categories:', err);
-      }
+      },
     });
   }
 }
