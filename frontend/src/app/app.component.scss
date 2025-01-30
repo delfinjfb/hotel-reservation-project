@@ -2,10 +2,12 @@
 .header {
   background-color: #333;
   color: #fff;
-  padding: 1rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0;
+  padding: 0;
 
   .logo a {
     font-size: 1.5rem;
@@ -34,7 +36,8 @@
 
 /* Main Content */
 main {
-  padding: 2rem;
+  padding: 0; // Remove unnecessary padding
+  margin-top: 0; // Ensure no margin at the top
   min-height: 80vh;
 }
 
