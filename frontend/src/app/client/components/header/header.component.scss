@@ -3,12 +3,19 @@ header {
   background-size: cover;
   background-position: center;
   color: #fff;
-  padding: 1rem 0;
+  padding: 0; // Remove extra padding
+  margin: 0; // Ensure no margin is added
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   nav {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem 0; // Ensure padding is inside the nav only, not the entire header
 
     .logo {
       font-family: 'Playfair Display', serif;
